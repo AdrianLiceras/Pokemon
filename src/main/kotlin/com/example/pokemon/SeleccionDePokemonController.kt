@@ -2,6 +2,7 @@ package com.example.pokemon
 
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
+import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
@@ -325,10 +326,6 @@ class SeleccionDePokemonController {
 
     fun continuarClicked(){
         try {
-            var select:Pokemon
-            var pokeSelection:PokemonSeleccionadoController
-
-
             val stage = Stage()
             val loader = FXMLLoader(HelloApplication::class.java.getResource("pokemon_seleccionado.fxml"))
             val scene = Scene(loader.load(), 600.0, 350.0)
@@ -337,6 +334,8 @@ class SeleccionDePokemonController {
             stage.isResizable = false
             stage.show()
 
+            var select:Pokemon
+            var pokeSelection:PokemonSeleccionadoController
             arrayPokemon.forEachIndexed { index, pokemon ->
                 println(arrayPokemon[index].click)
                 if (pokemon.click) {
