@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pokemon.PokemonSeleccionadoController">
+    <children>
+        <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imagenes/CampoBatalla.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="imagePokeSelect" fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="imagePokeEnemy" fitHeight="109.0" fitWidth="136.0" layoutX="387.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <BorderPane fx:id="borderAtacante" layoutX="331.0" layoutY="245.0" onMouseDragEntered="#onMouseAtackEntered" onMouseDragExited="#onMouseAtackExited" prefHeight="50.0" prefWidth="255.0" style="-fx-background-color: #f0ead6; -fx-border-color: #2f4f4f; -fx-border-width: 3;">
+         <bottom>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="psAtacante" text="Label" />
+                  <ProgressBar fx:id="progressAtacante" prefWidth="200.0" progress="1.0" style="-fx-accent: #20ee31; -fx-control-inner-background: transparent; -fx-text-box-border: transparent;">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ProgressBar>
+               </children>
+            </HBox>
+         </bottom>
+         <right>
+            <Label fx:id="nivelAtacante" text="Label" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </right>
+         <left>
+            <Label fx:id="nombreAtacante" text="Label" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </left>
+      </BorderPane>
+      <BorderPane fx:id="borderEnemy" layoutX="59.0" layoutY="108.0" onMouseDragEntered="#onMouseEnemyEntered" onMouseDragExited="#onMouseEnemyExited" prefHeight="50.0" prefWidth="255.0" style="-fx-background-color: #f0ead6; -fx-border-color: #2f4f4f; -fx-border-width: 3;">
+         <right>
+            <Label fx:id="nivelEnemy" text="Label" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </right>
+         <left>
+            <Label fx:id="nombreEnemy" text="Label" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </left>
+         <bottom>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="psEnemy" text="Label" />
+                  <ProgressBar fx:id="progressEnemy" prefWidth="200.0" progress="1.0" style="-fx-accent: #20ee31; -fx-control-inner-background: transparent; -fx-text-box-border: transparent;">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ProgressBar>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+    </children>
+</AnchorPane>
