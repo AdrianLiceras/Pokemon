@@ -323,25 +323,32 @@ class SeleccionDePokemonController {
         vBoxClicked(5)
 
     }
-
+    @FXML
     fun continuarClicked(){
         try {
+            var pokeSelection:PokemonSeleccionadoController
             val stage = Stage()
+            stage.isResizable = false
             val loader = FXMLLoader(HelloApplication::class.java.getResource("pokemon_seleccionado.fxml"))
             val scene = Scene(loader.load(), 600.0, 350.0)
             stage.title = "Pokemon"
             stage.scene = scene
-            stage.isResizable = false
             stage.show()
+            val controller = loader.getController<PokemonSeleccionadoController>()
 
-            var select:Pokemon
-            var pokeSelection:PokemonSeleccionadoController
+
+           var select:Pokemon
+
             arrayPokemon.forEachIndexed { index, pokemon ->
                 println(arrayPokemon[index].click)
                 if (pokemon.click) {
                     select = arrayPokemon[index]
-                    pokeSelection = PokemonSeleccionadoController(select)
-                    pokeSelection.initialize()
+
+                    controller.cargarPokemon(select)
+
+                    pokeSelection = PokemonSeleccionadoController()
+
+
                 }
             }
 
