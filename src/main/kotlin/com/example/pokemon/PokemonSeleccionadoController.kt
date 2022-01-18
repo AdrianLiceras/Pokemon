@@ -55,7 +55,7 @@ class PokemonSeleccionadoController() {
 
     class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
     class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
-    var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif",50)
+    var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
 
 
     fun cargarPokemon(pokemon :Pokemon) {
@@ -77,13 +77,18 @@ class PokemonSeleccionadoController() {
         interfazPokeCombat.ps.text="PS"
         interfazPokeCombat.nivel.text="Nvl "+pokeselec.nivel
         interfazPokeCombat.vida.progress=pokeselec.vidaRest.toDouble()/pokeselec.vidaMax
+        if(interfazPokeCombat.vida.progress>0.5)
+            interfazPokeCombat.vida.style="-fx-accent: #20ee31"
+        else
+            if(interfazPokeCombat.vida.progress>0.25)
+                interfazPokeCombat.vida.style="-fx-accent: #ff8929"
+            else
+                if (interfazPokeCombat.vida.progress<0.25)
+                    interfazPokeCombat.vida.style="-fx-accent:red"
+                  else
+                      if (interfazPokeCombat.vida.progress<0.5)
+                           interfazPokeCombat.vida.style="-fx-accent:#ff8929"
 
-        if (interfazPokeCombat.vida.progress<0.25)
-            interfazPokeCombat.vida.style="-fx-accent:red"
-        else{
-            if (interfazPokeCombat.vida.progress<0.5)
-                interfazPokeCombat.vida.style="-fx-accent:#ff8929"
-        }
 
     }
     val enemy= Random.nextInt(0, arrayPokeEnemy.size)
@@ -97,12 +102,17 @@ class PokemonSeleccionadoController() {
         interfazPokeCombatEnemy.ps.text="PS"
         interfazPokeCombatEnemy.nivel.text="Nvl "+enemigo.nivel
         interfazPokeCombatEnemy.vida.progress=enemigo.vidaRest.toDouble()/enemigo.vidaMax
-
-        if (interfazPokeCombatEnemy.vida.progress<0.25)
-            interfazPokeCombatEnemy.vida.style="-fx-accent:red"
-        else{
-            if (interfazPokeCombatEnemy.vida.progress<0.5)
+        if(interfazPokeCombatEnemy.vida.progress>0.5)
+            interfazPokeCombatEnemy.vida.style="-fx-accent: #20ee31"
+        else
+            if(interfazPokeCombatEnemy.vida.progress>0.25)
                 interfazPokeCombatEnemy.vida.style="-fx-accent:#ff8929"
+            else
+                if (interfazPokeCombatEnemy.vida.progress<0.25)
+                    interfazPokeCombatEnemy.vida.style="-fx-accent:red"
+                else{
+                    if (interfazPokeCombatEnemy.vida.progress<0.5)
+                        interfazPokeCombatEnemy.vida.style="-fx-accent:#ff8929"
         }
     }
 
@@ -220,7 +230,7 @@ class PokemonSeleccionadoController() {
         val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
         inicializarEnemy(enemyInterfaz)
 
-        if (enemigo.isAliveEnemy()) {
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(1)
             cargarPokemon(pokeselec)
         }
@@ -228,11 +238,12 @@ class PokemonSeleccionadoController() {
     }
     @FXML
     fun ataqueArriesgadoClicked(){
-
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
         enemigo.recibirAtackPlayer(2)
         val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
         inicializarEnemy(enemyInterfaz)
-        if (enemigo.isAliveEnemy()) {
+        }
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(2)
             cargarPokemon(pokeselec)
         }
@@ -240,11 +251,13 @@ class PokemonSeleccionadoController() {
     }
     @FXML
     fun ataqueMuyArriesgadoClicked(){
-        enemigo.recibirAtackPlayer(3)
-
-        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
-        inicializarEnemy(enemyInterfaz)
-        if (enemigo.isAliveEnemy()) {
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
+            enemigo.recibirAtackPlayer(3)
+            val enemyInterfaz =
+                InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
+            inicializarEnemy(enemyInterfaz)
+        }
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(3)
             cargarPokemon(pokeselec)
         }
@@ -252,16 +265,15 @@ class PokemonSeleccionadoController() {
 
     @FXML
     fun curarLabelClicked(){
-       if (enemigo.vidaRest<enemigo.vidaMax) {
-           if (enemigo.isAliveEnemy()) {
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
+            if (enemigo.vidaRest<enemigo.vidaMax) {
                enemigo.curarEnemy()
-               val enemyInterfaz =
-                   InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
+               val enemyInterfaz = InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
                inicializarEnemy(enemyInterfaz)
            }
        }
-       if (pokeselec.vidaRest<pokeselec.vidaMax) {
-           if (pokeselec.isAliveSelect()) {
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
+         if (pokeselec.vidaRest<pokeselec.vidaMax) {
                pokeselec.curarSelect()
                cargarPokemon(pokeselec)
            }
