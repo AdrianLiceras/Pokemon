@@ -11,7 +11,6 @@ import kotlin.random.Random
 
 class PokemonSeleccionadoController() {
 
-
     @FXML
     private lateinit var imagePokeSelect:ImageView
     @FXML
@@ -38,15 +37,31 @@ class PokemonSeleccionadoController() {
     private lateinit var psEnemy: Label
     @FXML
     private lateinit var ataqueMenu:BorderPane
+    @FXML
+    private lateinit var atacarLabel: Label
+    @FXML
+    private lateinit var ataqueSeguro: Label
+    @FXML
+    private lateinit var ataqueArriesgado: Label
+    @FXML
+    private lateinit var ataqueMuyArriesgado: Label
+    @FXML
+    private lateinit var curarLabel: Label
+    @FXML
+    private lateinit var cancelarAtack: Label
+    @FXML
+    private lateinit var borderMenu: BorderPane
+
 
     class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
-    class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
-    var pokeselec= Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif",50)
+    class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
+    var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif",50)
 
 
-    fun cargarPokemon(pokemon : Pokemon) {
-        pokeselec = pokemon
+    fun cargarPokemon(pokemon :Pokemon) {
         pokemon.click=false
+        pokeselec = pokemon
+
         val atackInterfaz=InterfazPokeCombatSelect(nombreAtacante,progressAtacante,psAtacante,nivelAtacante,imagePokeSelect)
         inicializarSeleccion(atackInterfaz)
 
@@ -72,15 +87,16 @@ class PokemonSeleccionadoController() {
 
     }
     val enemy= Random.nextInt(0, arrayPokeEnemy.size)
+    val enemigo= arrayPokeEnemy[enemy]
     fun inicializarEnemy(interfazPokeCombatEnemy: InterfazPokeCombatEnemy){
 
-        val pokeEnemy=File(arrayPokeEnemy[enemy].image)
+        val pokeEnemy=File(enemigo.image)
         interfazPokeCombatEnemy.imagen.image=Image(pokeEnemy.toURI().toString())
 
-        interfazPokeCombatEnemy.nombre.text= arrayPokeEnemy[enemy].nombre
+        interfazPokeCombatEnemy.nombre.text= enemigo.nombre
         interfazPokeCombatEnemy.ps.text="PS"
-        interfazPokeCombatEnemy.nivel.text="Nvl "+arrayPokeEnemy[enemy].nivel
-        interfazPokeCombatEnemy.vida.progress=arrayPokeEnemy[enemy].vidaRest.toDouble()/arrayPokeEnemy[enemy].vidaMax
+        interfazPokeCombatEnemy.nivel.text="Nvl "+enemigo.nivel
+        interfazPokeCombatEnemy.vida.progress=enemigo.vidaRest.toDouble()/enemigo.vidaMax
 
         if (interfazPokeCombatEnemy.vida.progress<0.25)
             interfazPokeCombatEnemy.vida.style="-fx-accent:red"
@@ -92,7 +108,7 @@ class PokemonSeleccionadoController() {
 
     @FXML
     fun initialize(){
-        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy)
+        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
 
         inicializarEnemy(enemyInterfaz)
     }
@@ -104,7 +120,7 @@ class PokemonSeleccionadoController() {
     }
 
     fun verVidaEnemy(label: Label){
-        label.text= arrayPokeEnemy[enemy].vidaRest.toString()
+        label.text=enemigo.vidaRest.toString()
     }
     fun resetVerVidaEnemy(label: Label){
         label.text="PS"
@@ -128,7 +144,127 @@ class PokemonSeleccionadoController() {
     }
     @FXML
     fun ataqueClicked(){
-        ataqueMenu.disableProperty().set(false)
-        ataqueMenu.opacity=1.0
+        borderMenu.visibleProperty().set(false)
+        ataqueMenu.visibleProperty().set(true)
+    }
+
+    @FXML
+    fun underlineTrue(label:Label){
+        label.underlineProperty().set(true)
+    }
+    @FXML
+    fun underlineFalse(label:Label){
+        label.underlineProperty().set(false)
+    }
+
+
+    @FXML
+    fun atackEntered(){
+        underlineTrue(atacarLabel)
+    }
+    @FXML
+    fun atackExited(){
+        underlineFalse(atacarLabel)
+    }
+    @FXML
+    fun ataqueSeguroEntered(){
+        underlineTrue(ataqueSeguro)
+    }
+    @FXML
+    fun ataqueSeguroExited(){
+        underlineFalse(ataqueSeguro)
+    }
+    @FXML
+    fun ataqueArriesgadoEntered(){
+        underlineTrue(ataqueArriesgado)
+    }
+    @FXML
+    fun ataqueArriesgadoExited(){
+        underlineFalse(ataqueArriesgado)
+    }
+    @FXML
+    fun ataqueMuyArriesgadoEntered(){
+        underlineTrue(ataqueMuyArriesgado)
+    }
+    @FXML
+    fun ataqueMuyArriesgadoExited(){
+        underlineFalse(ataqueMuyArriesgado)
+    }
+    @FXML
+    fun curarLabelEntered(){
+        underlineTrue(curarLabel)
+    }
+    @FXML
+    fun curarLabelExited(){
+        underlineFalse(curarLabel)
+    }
+    @FXML
+    fun cancelarAtackEntered(){
+        underlineTrue(cancelarAtack)
+    }
+    @FXML
+    fun cancelarAtackExited(){
+        underlineFalse(cancelarAtack)
+    }
+    @FXML
+    fun cancelarAtackClicked(){
+        borderMenu.visibleProperty().set(true)
+        ataqueMenu.visibleProperty().set(false)
+
+    }
+
+    @FXML
+    fun ataqueSeguroClicked(){
+
+        enemigo.recibirAtackPlayer(1)
+        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
+        inicializarEnemy(enemyInterfaz)
+
+        if (enemigo.isAliveEnemy()) {
+            pokeselec.recibirAtack(1)
+            cargarPokemon(pokeselec)
+        }
+
+    }
+    @FXML
+    fun ataqueArriesgadoClicked(){
+
+        enemigo.recibirAtackPlayer(2)
+        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
+        inicializarEnemy(enemyInterfaz)
+        if (enemigo.isAliveEnemy()) {
+            pokeselec.recibirAtack(2)
+            cargarPokemon(pokeselec)
+        }
+
+    }
+    @FXML
+    fun ataqueMuyArriesgadoClicked(){
+        enemigo.recibirAtackPlayer(3)
+
+        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
+        inicializarEnemy(enemyInterfaz)
+        if (enemigo.isAliveEnemy()) {
+            pokeselec.recibirAtack(3)
+            cargarPokemon(pokeselec)
+        }
+    }
+
+    @FXML
+    fun curarLabelClicked(){
+       if (enemigo.vidaRest<enemigo.vidaMax) {
+           if (enemigo.isAliveEnemy()) {
+               enemigo.curarEnemy()
+               val enemyInterfaz =
+                   InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
+               inicializarEnemy(enemyInterfaz)
+           }
+       }
+       if (pokeselec.vidaRest<pokeselec.vidaMax) {
+           if (pokeselec.isAliveSelect()) {
+               pokeselec.curarSelect()
+               cargarPokemon(pokeselec)
+           }
+       }
     }
 }

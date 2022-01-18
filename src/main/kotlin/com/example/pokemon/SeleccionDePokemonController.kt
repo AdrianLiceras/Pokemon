@@ -224,18 +224,18 @@ class SeleccionDePokemonController {
 
     }
 
-    class InterfazPokemon(var nombre: Label,var nivel: Label,var ps: Label,var imagenPokemon: ImageView,var imagenGenero : ImageView,var vida : ProgressBar,var border: BorderPane,var vBox: VBox,var pokemon: Pokemon)
+    class InterfazPokemon(var nombre: Label,var nivel: Label,var ps: Label,var imagenPokemon: ImageView,var imagenGenero : ImageView,var vida : ProgressBar,var border: BorderPane,var pokemon: Pokemon)
 
     @FXML
     fun initialize(){
 
         listInterfaces = mutableListOf(
-            InterfazPokemon(nombre00,nivel00,ps00,pokemon00,genero00,vida00,border00,vBox00, arrayPokemon[0]),
-            InterfazPokemon(nombre10,nivel10,ps10,pokemon10,genero10,vida10,border10,vBox10,arrayPokemon[1]),
-            InterfazPokemon(nombre20,nivel20,ps20,pokemon20,genero20,vida20,border20,vBox20,arrayPokemon[2]),
-            InterfazPokemon(nombre01,nivel01,ps01,pokemon01,genero01,vida01,border01,vBox01,arrayPokemon[3]),
-            InterfazPokemon(nombre11,nivel11,ps11,pokemon11,genero11,vida11,border11,vBox11,arrayPokemon[4]),
-            InterfazPokemon(nombre21,nivel21,ps21,pokemon21,genero21,vida21,border21,vBox21,arrayPokemon[5]),
+            InterfazPokemon(nombre00,nivel00,ps00,pokemon00,genero00,vida00,border00, arrayPokemon[0]),
+            InterfazPokemon(nombre10,nivel10,ps10,pokemon10,genero10,vida10,border10,arrayPokemon[1]),
+            InterfazPokemon(nombre20,nivel20,ps20,pokemon20,genero20,vida20,border20,arrayPokemon[2]),
+            InterfazPokemon(nombre01,nivel01,ps01,pokemon01,genero01,vida01,border01,arrayPokemon[3]),
+            InterfazPokemon(nombre11,nivel11,ps11,pokemon11,genero11,vida11,border11,arrayPokemon[4]),
+            InterfazPokemon(nombre21,nivel21,ps21,pokemon21,genero21,vida21,border21,arrayPokemon[5]),
         )
 
         listInterfaces.forEachIndexed { index, interfazPokemon ->
