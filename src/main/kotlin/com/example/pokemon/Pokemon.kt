@@ -60,7 +60,7 @@ data class PokeEnemy(val nombre: String,val image: String,val nivel: Int,val vid
         var atack3=0
         if (this.isAliveEnemy())
             if (i==1)
-                if (vidaRest-20<0)
+                if (vidaRest-2000<0)
                     vidaRest=0
                 else
                     vidaRest-=20

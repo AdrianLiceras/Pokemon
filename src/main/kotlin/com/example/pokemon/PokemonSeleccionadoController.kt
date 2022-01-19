@@ -5,6 +5,7 @@ import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.BorderPane
 import java.io.File
 import kotlin.random.Random
@@ -51,8 +52,12 @@ class PokemonSeleccionadoController() {
     private lateinit var cancelarAtack: Label
     @FXML
     private lateinit var borderMenu: BorderPane
-
-
+    @FXML
+    private lateinit var anchorMuerto: AnchorPane
+    @FXML
+    private lateinit var textoMuerto: Label
+    @FXML
+    private lateinit var imagenMuerto: ImageView
     class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
     class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
     var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
@@ -222,7 +227,7 @@ class PokemonSeleccionadoController() {
         ataqueMenu.visibleProperty().set(false)
 
     }
-
+    var seleccionDePokemonController=SeleccionDePokemonController()
     @FXML
     fun ataqueSeguroClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
@@ -233,9 +238,13 @@ class PokemonSeleccionadoController() {
         }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(1)
+            seleccionDePokemonController.comprobar()
             cargarPokemon(pokeselec)
         }
-
+        if (!enemigo.isAliveEnemy())
+            alertaEnemy(enemigo)
+        if(!pokeselec.isAliveSelect())
+            alertaSelec(pokeselec)
     }
     @FXML
     fun ataqueArriesgadoClicked(){
@@ -246,9 +255,13 @@ class PokemonSeleccionadoController() {
         }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(2)
+            seleccionDePokemonController.comprobar()
             cargarPokemon(pokeselec)
         }
-
+        if (!enemigo.isAliveEnemy())
+            alertaEnemy(enemigo)
+        if(!pokeselec.isAliveSelect())
+            alertaSelec(pokeselec)
     }
     @FXML
     fun ataqueMuyArriesgadoClicked(){
@@ -260,8 +273,13 @@ class PokemonSeleccionadoController() {
         }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(3)
+            seleccionDePokemonController.comprobar()
             cargarPokemon(pokeselec)
         }
+        if (!enemigo.isAliveEnemy())
+            alertaEnemy(enemigo)
+        if(!pokeselec.isAliveSelect())
+            alertaSelec(pokeselec)
     }
 
     @FXML
@@ -276,8 +294,33 @@ class PokemonSeleccionadoController() {
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
          if (pokeselec.vidaRest<pokeselec.vidaMax) {
                pokeselec.curarSelect()
+               seleccionDePokemonController.comprobar()
                cargarPokemon(pokeselec)
            }
        }
+    }
+
+
+    fun enviarDatosMenuSeleccion(seleccionDePokemonController: SeleccionDePokemonController){
+        this.seleccionDePokemonController=seleccionDePokemonController
+    }
+
+    fun alertaSelec(pokemon: Pokemon){
+        anchorMuerto.visibleProperty().set(true)
+        textoMuerto.text="El pokemon ${pokemon.nombre} ha muerto"
+        val imagenFileMuerto=File(pokemon.image)
+        imagenMuerto.image=Image(imagenFileMuerto.toURI().toString())
+    }
+    fun alertaEnemy(pokeEnemy: PokeEnemy){
+        anchorMuerto.visibleProperty().set(true)
+        textoMuerto.text="El pokemon ${pokeEnemy.nombre} ha muerto"
+        val imagenFileMuerto=File(pokeEnemy.image)
+        imagenMuerto.image=Image(imagenFileMuerto.toURI().toString())
+    }
+    fun salirClicked(){
+        System.exit(0)
+    }
+    fun continuarClicked(){
+
     }
 }

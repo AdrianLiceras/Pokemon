@@ -324,38 +324,44 @@ class SeleccionDePokemonController {
         vBoxClicked(5)
 
     }
+    companion object var stage: Stage? =null
     @FXML
     fun continuarClicked(){
+
         try {
+            if(stage==null) {
             var pokeSelection:PokemonSeleccionadoController
-            val stage = Stage()
-            stage.isResizable = false
+            stage = Stage()
+            stage?.isResizable = false
             val loader = FXMLLoader(HelloApplication::class.java.getResource("pokemon_seleccionado.fxml"))
             val scene = Scene(loader.load(), 600.0, 350.0)
-            stage.title = "Pokemon"
-            stage.scene = scene
-            stage.show()
-            val controller = loader.getController<PokemonSeleccionadoController>()
+            stage?.title = "Pokemon"
+            stage?.scene = scene
+            stage?.show()
 
+                val controller = loader.getController<PokemonSeleccionadoController>()
 
-           var select:Pokemon
+                var select: Pokemon
 
-            arrayPokemon.forEachIndexed { index, pokemon ->
-                println(arrayPokemon[index].click)
-                if (pokemon.click) {
-                    select = arrayPokemon[index]
+                arrayPokemon.forEachIndexed { index, pokemon ->
+                    println(arrayPokemon[index].click)
+                    if (pokemon.click) {
+                        select = arrayPokemon[index]
 
-                    controller.cargarPokemon(select)
+                        controller.cargarPokemon(select)
+                        controller.enviarDatosMenuSeleccion(this)
+                        pokeSelection = PokemonSeleccionadoController()
 
-                    pokeSelection = PokemonSeleccionadoController()
-
-
+                    }
                 }
             }
-
         }catch (e: IOException){
             e.printStackTrace()
         }
+    }
+
+    fun comprobar(){
+        initialize()
     }
 
 }
