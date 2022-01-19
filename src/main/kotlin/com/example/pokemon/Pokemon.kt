@@ -14,20 +14,36 @@ data class Pokemon(val nombre:String,val image:String,val vidaMax:Int,var nivel:
     }
 
     fun recibirAtack(i:Int){
-
+        var atack2=0
+        var atack3=0
         if (this.isAliveSelect())
             if (i==1)
-                vidaRest-=20
+                if (vidaRest-20<0)
+                    vidaRest=0
+                else
+                    vidaRest-=20
             else if (i==2)
-                 vidaRest-= Random.nextInt(10,26)
-                 else if (i==3)
-                    vidaRest-=Random.nextInt(0,51)
+                   atack2=  Random.nextInt(10,26)
+                if (vidaRest-atack2<0)
+                    vidaRest=0
+                else
+                    vidaRest-=atack2
+                 if (i==3)
+                     atack3=Random.nextInt(0,51)
+                    if (vidaRest-atack3<0)
+                        vidaRest=0
+                    else
+                        vidaRest-=atack3
 
 
     }
 
     fun curarSelect(){
-        vidaRest+=Random.nextInt(25,76)
+        var curarAliado=Random.nextInt(25,76)
+        if (vidaRest+curarAliado>vidaMax)
+            vidaRest=vidaMax
+        else
+            vidaRest+=curarAliado
     }
 }
 data class PokeEnemy(val nombre: String,val image: String,val nivel: Int,val vidaMax: Int,var vidaRest: Int=vidaMax){
@@ -40,16 +56,34 @@ data class PokeEnemy(val nombre: String,val image: String,val nivel: Int,val vid
         return vivo
     }
     fun recibirAtackPlayer(i:Int){
+        var atack2=0
+        var atack3=0
         if (this.isAliveEnemy())
             if (i==1)
-                vidaRest-=20
+                if (vidaRest-20<0)
+                    vidaRest=0
+                else
+                    vidaRest-=20
             else if (i==2)
-                vidaRest-= Random.nextInt(10,26)
-                else if (i==3)
-                    vidaRest-=Random.nextInt(0,51)
+                atack2=  Random.nextInt(10,26)
+                if (vidaRest-atack2<0)
+                    vidaRest=0
+                else
+                    vidaRest-=atack2
+                    if (i==3)
+                            atack3=Random.nextInt(0,51)
+                        if (vidaRest-atack3<0)
+                            vidaRest=0
+                        else
+                            vidaRest-=atack3
+
     }
 
     fun curarEnemy(){
-        vidaRest+=Random.nextInt(25,76)
+        var curarEnemigo=Random.nextInt(25,76)
+        if (vidaRest+curarEnemigo>vidaMax)
+            vidaRest=vidaMax
+        else
+            vidaRest+=curarEnemigo
     }
 }

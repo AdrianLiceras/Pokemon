@@ -221,6 +221,7 @@ class SeleccionDePokemonController {
         interfazPokemon.nivel.textFill=Color.web("white")
         interfazPokemon.ps.textFill=Color.web("white")
         interfazPokemon.border.style= "-fx-border-color: #47175e; -fx-background-color:#61355e; -fx-border-width:3"
+        interfazPokemon.pokemon.click=false
 
     }
 

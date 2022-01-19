@@ -225,11 +225,12 @@ class PokemonSeleccionadoController() {
 
     @FXML
     fun ataqueSeguroClicked(){
-
-        enemigo.recibirAtackPlayer(1)
-        val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
-        inicializarEnemy(enemyInterfaz)
-
+        if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
+            enemigo.recibirAtackPlayer(1)
+            val enemyInterfaz =
+                InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
+            inicializarEnemy(enemyInterfaz)
+        }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(1)
             cargarPokemon(pokeselec)
