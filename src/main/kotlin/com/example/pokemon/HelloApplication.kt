@@ -18,9 +18,9 @@ class HelloApplication : Application() {
         val poke11=Pokemon("Mewtwo","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Mewtwo.gif",298,75,"file:","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\MewtwoCombate.gif")
         val poke12=Pokemon("Butterfree","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Butterfree.gif",160,54,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\ButterfreeCombate.gif")
         //Creacción de objetos Pokemon enemigos
-        val pokeEnemy1=PokeEnemy("Onix","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\OnixCombate.gif",60,200)
-        val pokeEnemy2=PokeEnemy("Palkia","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\PalkiaCombate.gif",70,240)
-        val pokeEnemy3=PokeEnemy("Snorlax","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\SnorlaxCombate.gif",55,220)
+        val pokeEnemy1=PokeEnemy("Onix","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\OnixCombate.gif",60,200,)
+        val pokeEnemy2=PokeEnemy("Palkia","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\PalkiaCombate.gif",70,240,)
+        val pokeEnemy3=PokeEnemy("Snorlax","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\SnorlaxCombate.gif",55,220,)
         val pokeEnemy4=PokeEnemy("Scizor","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\ScizorCombate.gif",60,190)
         //Rellenar lista de Pokemon Enemigo
         arrayPokeEnemy.add(pokeEnemy1)

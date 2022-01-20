@@ -1,6 +1,7 @@
 package com.example.pokemon
 
 import javafx.fxml.FXML
+import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
 import javafx.scene.image.Image
@@ -11,6 +12,8 @@ import java.io.File
 import kotlin.random.Random
 
 class PokemonSeleccionadoController() {
+
+
 
     @FXML
     private lateinit var imagePokeSelect:ImageView
@@ -58,6 +61,8 @@ class PokemonSeleccionadoController() {
     private lateinit var textoMuerto: Label
     @FXML
     private lateinit var imagenMuerto: ImageView
+    @FXML
+    private lateinit var continuarMuerto: Button
     class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
     class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
     var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
@@ -96,9 +101,27 @@ class PokemonSeleccionadoController() {
 
 
     }
-    val enemy= Random.nextInt(0, arrayPokeEnemy.size)
-    val enemigo= arrayPokeEnemy[enemy]
+    var enemy=Random.nextInt(0, arrayPokeEnemy.size)
+    var enemigo= arrayPokeEnemy[enemy]
+    var arrayCopia=copiarArray(arrayPokeEnemy)
+
+    fun copiarArray(arrayEnemy: ArrayList<PokeEnemy>):ArrayList<PokeEnemy>{
+        val arrayCopia:ArrayList<PokeEnemy>?=ArrayList()
+        arrayEnemy.forEach { pokeEnemy ->
+            arrayCopia?.add(pokeEnemy)
+        }
+        return if (arrayCopia!=null)
+            arrayCopia
+        else
+            arrayEnemy
+    }
+    fun alertaArrayVacio(){
+        anchorMuerto.visibleProperty().set(true)
+        textoMuerto.text="No quedan enemigos"
+        continuarMuerto.disableProperty().set(true)
+    }
     fun inicializarEnemy(interfazPokeCombatEnemy: InterfazPokeCombatEnemy){
+
 
         val pokeEnemy=File(enemigo.image)
         interfazPokeCombatEnemy.imagen.image=Image(pokeEnemy.toURI().toString())
@@ -124,8 +147,17 @@ class PokemonSeleccionadoController() {
     @FXML
     fun initialize(){
         val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
+       // val interfazVacia=InterfazPokeCombatEnemy(nombre = Label(""), vida = ProgressBar(0.0), ps = Label(""), nivel = Label(""), imagen = ImageView("file:"), pokeEnemy = PokeEnemy("","",0,0))
+        while (arrayCopia[enemy].vidaRest==0) {
+            arrayCopia.removeAt(enemy)
+            if (arrayCopia.size>0) {
+                enemy = Random.nextInt(0, arrayCopia.size)
+                enemigo = arrayCopia[enemy]
+            } else
+                alertaArrayVacio()
+        }
+           inicializarEnemy(enemyInterfaz)
 
-        inicializarEnemy(enemyInterfaz)
     }
     fun verVida(label: Label){
         label.text=pokeselec.vidaRest.toString()
@@ -238,10 +270,12 @@ class PokemonSeleccionadoController() {
         }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(1)
-            seleccionDePokemonController.comprobar()
+            seleccionDePokemonController.actualizarEstado(pokeselec)
             cargarPokemon(pokeselec)
         }
         if (!enemigo.isAliveEnemy())
+            if (arrayCopia.size==1)
+                continuarMuerto.disableProperty().set(true)
             alertaEnemy(enemigo)
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
@@ -255,10 +289,12 @@ class PokemonSeleccionadoController() {
         }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(2)
-            seleccionDePokemonController.comprobar()
+            seleccionDePokemonController.actualizarEstado(pokeselec)
             cargarPokemon(pokeselec)
         }
         if (!enemigo.isAliveEnemy())
+            if (arrayCopia.size==1)
+                continuarMuerto.disableProperty().set(true)
             alertaEnemy(enemigo)
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
@@ -273,10 +309,12 @@ class PokemonSeleccionadoController() {
         }
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             pokeselec.recibirAtack(3)
-            seleccionDePokemonController.comprobar()
+            seleccionDePokemonController.actualizarEstado(pokeselec)
             cargarPokemon(pokeselec)
         }
         if (!enemigo.isAliveEnemy())
+            if (arrayCopia.size==1)
+                continuarMuerto.disableProperty().set(true)
             alertaEnemy(enemigo)
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
@@ -294,7 +332,7 @@ class PokemonSeleccionadoController() {
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
          if (pokeselec.vidaRest<pokeselec.vidaMax) {
                pokeselec.curarSelect()
-               seleccionDePokemonController.comprobar()
+               seleccionDePokemonController.actualizarEstado(pokeselec)
                cargarPokemon(pokeselec)
            }
        }

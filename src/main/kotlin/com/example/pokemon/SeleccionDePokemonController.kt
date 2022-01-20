@@ -325,11 +325,13 @@ class SeleccionDePokemonController {
 
     }
     companion object var stage: Stage? =null
+
     @FXML
     fun continuarClicked(){
 
         try {
             if(stage==null) {
+
             var pokeSelection:PokemonSeleccionadoController
             stage = Stage()
             stage?.isResizable = false
@@ -360,8 +362,20 @@ class SeleccionDePokemonController {
         }
     }
 
-    fun comprobar(){
-        initialize()
+
+    fun actualizarEstado(pokemon: Pokemon){
+        listInterfaces.forEachIndexed { index, interfazPokemon ->
+            if (pokemon.nombre.equals(interfazPokemon.pokemon.nombre)){
+                interfazPokemon.ps.text=pokemon.vidaRest.toString() + "/" + pokemon.vidaMax.toString()
+                interfazPokemon.vida.progress= pokemon.vidaRest.toDouble()/ pokemon.vidaMax.toDouble()
+            if (interfazPokemon.vida.progress<0.25)
+                interfazPokemon.vida.style="-fx-accent:red"
+            else{
+                if (interfazPokemon.vida.progress<0.5)
+                    interfazPokemon.vida.style="-fx-accent:#ff8929"
+            }
+            }
+        }
     }
 
 }
