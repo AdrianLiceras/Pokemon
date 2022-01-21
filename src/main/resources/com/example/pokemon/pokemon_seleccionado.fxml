@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
@@ -117,13 +116,5 @@
             </Label>
          </right>
       </BorderPane>
-      <AnchorPane fx:id="anchorMuerto" layoutX="119.0" layoutY="39.0" prefHeight="281.0" prefWidth="362.0" style="-fx-background-color: #f0ead6; -fx-border-color: #2f4f4f; -fx-border-width: 3;" visible="false">
-         <children>
-            <ImageView fx:id="imagenMuerto" fitHeight="150.0" fitWidth="200.0" layoutX="109.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="textoMuerto" layoutX="81.0" layoutY="49.0" text="Label" />
-            <Button fx:id="salir" layoutX="255.0" layoutY="219.0" mnemonicParsing="false" onMouseClicked="#salirClicked" text="SALIR" />
-            <Button fx:id="continuarMuerto" layoutX="53.0" layoutY="219.0" mnemonicParsing="false" onMouseClicked="#continuarClicked" text="CONTINUAR" />
-         </children>
-      </AnchorPane>
     </children>
 </AnchorPane>

@@ -1,15 +1,16 @@
 package com.example.pokemon
 
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.ProgressBar
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.BorderPane
+import javafx.stage.Stage
 import java.io.File
+import java.util.*
 import kotlin.random.Random
+import kotlin.system.exitProcess
 
 class PokemonSeleccionadoController() {
 
@@ -63,6 +64,9 @@ class PokemonSeleccionadoController() {
     private lateinit var imagenMuerto: ImageView
     @FXML
     private lateinit var continuarMuerto: Button
+
+
+
     class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
     class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
     var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
@@ -273,10 +277,11 @@ class PokemonSeleccionadoController() {
             seleccionDePokemonController.actualizarEstado(pokeselec)
             cargarPokemon(pokeselec)
         }
-        if (!enemigo.isAliveEnemy())
-            if (arrayCopia.size==1)
+        if (!enemigo.isAliveEnemy()) {
+            if (arrayCopia.size == 1)
                 continuarMuerto.disableProperty().set(true)
             alertaEnemy(enemigo)
+        }
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
     }
@@ -292,10 +297,11 @@ class PokemonSeleccionadoController() {
             seleccionDePokemonController.actualizarEstado(pokeselec)
             cargarPokemon(pokeselec)
         }
-        if (!enemigo.isAliveEnemy())
-            if (arrayCopia.size==1)
+        if (!enemigo.isAliveEnemy()) {
+            if (arrayCopia.size == 1)
                 continuarMuerto.disableProperty().set(true)
             alertaEnemy(enemigo)
+        }
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
     }
@@ -312,10 +318,11 @@ class PokemonSeleccionadoController() {
             seleccionDePokemonController.actualizarEstado(pokeselec)
             cargarPokemon(pokeselec)
         }
-        if (!enemigo.isAliveEnemy())
-            if (arrayCopia.size==1)
+        if (!enemigo.isAliveEnemy()) {
+            if (arrayCopia.size == 1)
                 continuarMuerto.disableProperty().set(true)
             alertaEnemy(enemigo)
+        }
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
     }
@@ -338,27 +345,55 @@ class PokemonSeleccionadoController() {
        }
     }
 
+    fun alertaSelec(pokemon: Pokemon){
+
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.headerText = null
+        alert.title = "POKEMON MUERTO"
+        alert.width=600.0
+        alert.height=350.0
+        alert.contentText = "El pokemon " + pokemon.nombre + " ha muerto"
+        val pokeMuerto=File(pokemon.image)
+        alert.graphic = ImageView(Image(pokeMuerto.toURI().toString()))
+        val action = alert.showAndWait()
+        if (action.get() == ButtonType.OK) {
+            continuar()
+        } else {
+            salir()
+        }
+    }
+    fun alertaEnemy(pokemon: PokeEnemy){
+
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.headerText = null
+        alert.title = "POKEMON MUERTO"
+        alert.contentText = "El pokemon " + pokemon.nombre + " ha muerto"
+        alert.width=600.0
+        alert.height=350.0
+        val pokeMuerto=File(pokemon.image)
+        alert.graphic = ImageView(Image(pokeMuerto.toURI().toString()))
+        val action = alert.showAndWait()
+
+        if (action.get() == ButtonType.OK) {
+            continuar()
+        } else {
+            salir()
+        }
+    }
+    fun salir() {
+        exitProcess(0)
+    }
+
+    fun continuar() {
+
+        val stage = continuarMuerto.scene.window as Stage
+        stage.close()
+        SeleccionDePokemonController().stage=null
+    }
+
 
     fun enviarDatosMenuSeleccion(seleccionDePokemonController: SeleccionDePokemonController){
         this.seleccionDePokemonController=seleccionDePokemonController
     }
 
-    fun alertaSelec(pokemon: Pokemon){
-        anchorMuerto.visibleProperty().set(true)
-        textoMuerto.text="El pokemon ${pokemon.nombre} ha muerto"
-        val imagenFileMuerto=File(pokemon.image)
-        imagenMuerto.image=Image(imagenFileMuerto.toURI().toString())
-    }
-    fun alertaEnemy(pokeEnemy: PokeEnemy){
-        anchorMuerto.visibleProperty().set(true)
-        textoMuerto.text="El pokemon ${pokeEnemy.nombre} ha muerto"
-        val imagenFileMuerto=File(pokeEnemy.image)
-        imagenMuerto.image=Image(imagenFileMuerto.toURI().toString())
-    }
-    fun salirClicked(){
-        System.exit(0)
-    }
-    fun continuarClicked(){
-
-    }
 }

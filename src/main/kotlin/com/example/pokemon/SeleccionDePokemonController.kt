@@ -190,7 +190,7 @@ class SeleccionDePokemonController {
     //Continuar
     @FXML
     private lateinit var continuar:Label
-
+    companion object var stage: Stage? =null
     fun inicializar(interfazPokemon: InterfazPokemon,i:Int){
         interfazPokemon.nombre.text=arrayPokemon[i].nombre
         interfazPokemon.nivel.text="Nv "+arrayPokemon[i].nivel.toString()
@@ -215,6 +215,8 @@ class SeleccionDePokemonController {
         interfazPokemon.ps.textFill=Color.web("#38e8fc")
         interfazPokemon.border.style="-fx-border-color:white; -fx-background-color:#c650c4; -fx-border-width:3"
         interfazPokemon.pokemon.click=true
+        if (interfazPokemon.pokemon.vidaRest<=0)
+            continuar.disableProperty().set(true)
     }
     fun reset(interfazPokemon: InterfazPokemon){
         interfazPokemon.nombre.textFill= Color.web("white")
@@ -324,7 +326,7 @@ class SeleccionDePokemonController {
         vBoxClicked(5)
 
     }
-    companion object var stage: Stage? =null
+
 
     @FXML
     fun continuarClicked(){
