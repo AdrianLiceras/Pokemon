@@ -350,8 +350,6 @@ class PokemonSeleccionadoController() {
         val alert = Alert(Alert.AlertType.CONFIRMATION)
         alert.headerText = null
         alert.title = "POKEMON MUERTO"
-        alert.width=600.0
-        alert.height=350.0
         alert.contentText = "El pokemon " + pokemon.nombre + " ha muerto"
         val pokeMuerto=File(pokemon.image)
         alert.graphic = ImageView(Image(pokeMuerto.toURI().toString()))
@@ -368,8 +366,6 @@ class PokemonSeleccionadoController() {
         alert.headerText = null
         alert.title = "POKEMON MUERTO"
         alert.contentText = "El pokemon " + pokemon.nombre + " ha muerto"
-        alert.width=600.0
-        alert.height=350.0
         val pokeMuerto=File(pokemon.image)
         alert.graphic = ImageView(Image(pokeMuerto.toURI().toString()))
         val action = alert.showAndWait()
