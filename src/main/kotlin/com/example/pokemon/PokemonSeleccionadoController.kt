@@ -157,8 +157,7 @@ class PokemonSeleccionadoController() {
             if (arrayCopia.size>0) {
                 enemy = Random.nextInt(0, arrayCopia.size)
                 enemigo = arrayCopia[enemy]
-            } else
-                alertaArrayVacio()
+            }
         }
            inicializarEnemy(enemyInterfaz)
 
@@ -348,11 +347,13 @@ class PokemonSeleccionadoController() {
     fun alertaSelec(pokemon: Pokemon){
 
         val alert = Alert(Alert.AlertType.CONFIRMATION)
+
         alert.headerText = null
         alert.title = "POKEMON MUERTO"
         alert.contentText = "El pokemon " + pokemon.nombre + " ha muerto"
         val pokeMuerto=File(pokemon.image)
         alert.graphic = ImageView(Image(pokeMuerto.toURI().toString()))
+
         val action = alert.showAndWait()
         if (action.get() == ButtonType.OK) {
             continuar()
@@ -368,6 +369,7 @@ class PokemonSeleccionadoController() {
         alert.contentText = "El pokemon " + pokemon.nombre + " ha muerto"
         val pokeMuerto=File(pokemon.image)
         alert.graphic = ImageView(Image(pokeMuerto.toURI().toString()))
+
         val action = alert.showAndWait()
 
         if (action.get() == ButtonType.OK) {
@@ -382,9 +384,10 @@ class PokemonSeleccionadoController() {
 
     fun continuar() {
 
-        val stage = continuarMuerto.scene.window as Stage
+        val stage = ataqueMenu.scene.window as Stage
         stage.close()
-        SeleccionDePokemonController().stage=null
+       seleccionDePokemonController.stage=null
+
     }
 
 

@@ -11,12 +11,12 @@ class HelloApplication : Application() {
     override fun start(stage: Stage) {
 
         //Creación de objetos Pokemon
-        val poke00=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif",0)
-        val poke01=Pokemon("Charizard","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Charizard.gif",148,45,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\CharizardCombate.gif",0)
-        val poke02=Pokemon("Vaporeon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Vaporeon.gif",234,54,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\VaporeonCombate.gif",0)
-        val poke10=Pokemon("Blastoise","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Blastoise.gif",222,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\BlastoiseCombate.gif",0)
+        val poke00=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
+        val poke01=Pokemon("Charizard","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Charizard.gif",148,45,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\CharizardCombate.gif")
+        val poke02=Pokemon("Vaporeon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Vaporeon.gif",234,54,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\VaporeonCombate.gif")
+        val poke10=Pokemon("Blastoise","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Blastoise.gif",222,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\BlastoiseCombate.gif")
         val poke11=Pokemon("Mewtwo","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Mewtwo.gif",298,75,"file:","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\MewtwoCombate.gif")
-        val poke12=Pokemon("Butterfree","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Butterfree.gif",160,54,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\ButterfreeCombate.gif",0)
+        val poke12=Pokemon("Butterfree","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Butterfree.gif",160,54,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\ButterfreeCombate.gif")
         //Creacción de objetos Pokemon enemigos
         val pokeEnemy1=PokeEnemy("Onix","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\OnixCombate.gif",60,200)
         val pokeEnemy2=PokeEnemy("Palkia","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\PalkiaCombate.gif",70,240)
