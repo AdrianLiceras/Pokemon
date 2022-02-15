@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #753986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pokemon.SeleccionDePokemonController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #753986;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pokemon.SeleccionDePokemonController">
     <children>
         <Label layoutX="15.0" layoutY="370.0" text="Elige un pokemon" textFill="WHITE" />
         <Label fx:id="continuar" layoutX="560.0" layoutY="370.0" onMouseClicked="#continuarClicked" text="Continuar" textFill="WHITE" />
@@ -410,6 +410,7 @@
                 </VBox>
             </children>
         </GridPane>
+      <Label fx:id="estadisticas" layoutX="318.0" layoutY="370.0" onMouseClicked="#estadisticasClicked" text="Estadísticas" textFill="WHITE" />
     </children>
     <padding>
         <Insets right="-10.0" top="10.0" />

@@ -17,24 +17,29 @@ data class Pokemon(val nombre:String,val image:String,val vidaMax:Int,var nivel:
         var atack2=0
         var atack3=0
         if (this.isAliveSelect())
-            if (i==1)
+            if (i==1){
+                damageDone+=20
                 if (vidaRest-20<0)
                     vidaRest=0
                 else
                     vidaRest-=20
-            else if (i==2)
-                   atack2=  Random.nextInt(10,26)
-                if (vidaRest-atack2<0)
+            }
+            else if (i==2) {
+                atack2 = Random.nextInt(10, 26)
+                damageDone+=atack2
+                  if (vidaRest-atack2<0)
                     vidaRest=0
-                else
+                  else
                     vidaRest-=atack2
-                 if (i==3)
+            }
+                 if (i==3){
                      atack3=Random.nextInt(0,51)
+                     damageDone+=atack3
                     if (vidaRest-atack3<0)
                         vidaRest=0
                     else
                         vidaRest-=atack3
-
+                 }
 
     }
 
@@ -59,23 +64,29 @@ data class PokeEnemy(val nombre: String,val image: String,val nivel: Int,val vid
         var atack2=0
         var atack3=0
         if (this.isAliveEnemy())
-            if (i==1)
+            if (i==1){
+                damageTaken+=20
                 if (vidaRest-20<0)
                     vidaRest=0
                 else
                     vidaRest-=20
-            else if (i==2)
-                atack2=  Random.nextInt(10,26)
+            }
+            else if (i==2) {
+                atack2 = Random.nextInt(10, 26)
+                damageTaken+=atack2
                 if (vidaRest-atack2<0)
                     vidaRest=0
                 else
                     vidaRest-=atack2
-                    if (i==3)
-                            atack3=Random.nextInt(0,51)
-                        if (vidaRest-atack3<0)
-                            vidaRest=0
-                        else
-                            vidaRest-=atack3
+            }
+            if (i==3){
+                atack3=Random.nextInt(0,51)
+                damageTaken+=atack3
+                if (vidaRest-atack3<0)
+                    vidaRest=0
+                else
+                    vidaRest-=atack3
+            }
 
     }
 

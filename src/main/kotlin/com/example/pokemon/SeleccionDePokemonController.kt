@@ -2,7 +2,6 @@ package com.example.pokemon
 
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressBar
@@ -190,7 +189,8 @@ class SeleccionDePokemonController {
     //Continuar
     @FXML
     private lateinit var continuar:Label
-    companion object var stage: Stage? =null
+    companion object var stageCombate: Stage? =null
+    var stageEstadisticas:Stage?=null
     fun inicializar(interfazPokemon: InterfazPokemon,i:Int){
         interfazPokemon.nombre.text=arrayPokemon[i].nombre
         interfazPokemon.nivel.text="Nv "+arrayPokemon[i].nivel.toString()
@@ -332,16 +332,16 @@ class SeleccionDePokemonController {
     fun continuarClicked(){
 
         try {
-            if(stage==null) {
+            if(stageCombate==null) {
 
             var pokeSelection:PokemonSeleccionadoController
-            stage = Stage()
-            stage?.isResizable = false
+            stageCombate = Stage()
+            stageCombate?.isResizable = false
             val loader = FXMLLoader(HelloApplication::class.java.getResource("pokemon_seleccionado.fxml"))
             val scene = Scene(loader.load(), 600.0, 350.0)
-            stage?.title = "Pokemon"
-            stage?.scene = scene
-            stage?.show()
+            stageCombate?.title = "Pokemon"
+            stageCombate?.scene = scene
+            stageCombate?.show()
 
                 val controller = loader.getController<PokemonSeleccionadoController>()
 
@@ -364,7 +364,24 @@ class SeleccionDePokemonController {
         }
     }
 
+    @FXML
+    fun estadisticasClicked(){
+        try {
+            if(stageEstadisticas==null) {
+                var estadisticasController = EstadisticasController()
+                stageEstadisticas = Stage()
+                stageEstadisticas?.isResizable = false
+                val loader = FXMLLoader(HelloApplication::class.java.getResource("estadisticas.fxml"))
+                val scene = Scene(loader.load(), 600.0, 350.0)
+                stageEstadisticas?.title = "Pokemon"
+                stageEstadisticas?.scene = scene
+                stageEstadisticas?.show()
+            }
+        }catch (e: IOException){
+            e.printStackTrace()
+        }
 
+    }
     fun actualizarEstado(pokemon: Pokemon){
         listInterfaces.forEachIndexed { index, interfazPokemon ->
             if (pokemon.nombre.equals(interfazPokemon.pokemon.nombre)){
@@ -377,7 +394,12 @@ class SeleccionDePokemonController {
                     interfazPokemon.vida.style="-fx-accent:#ff8929"
             }
             }
+            if(!interfazPokemon.pokemon.click) {
+                reset(interfazPokemon)
+                continuar.disableProperty().set(true)
+            }
         }
     }
+
 
 }

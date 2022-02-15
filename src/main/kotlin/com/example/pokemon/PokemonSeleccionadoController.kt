@@ -73,6 +73,7 @@ class PokemonSeleccionadoController() {
 
 
     fun cargarPokemon(pokemon :Pokemon) {
+
         pokemon.click=false
         pokeselec = pokemon
 
@@ -262,11 +263,13 @@ class PokemonSeleccionadoController() {
         ataqueMenu.visibleProperty().set(false)
 
     }
+    var estadisticasController=EstadisticasController()
     var seleccionDePokemonController=SeleccionDePokemonController()
     @FXML
     fun ataqueSeguroClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             enemigo.recibirAtackPlayer(1)
+
             val enemyInterfaz =
                 InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
             inicializarEnemy(enemyInterfaz)
@@ -288,6 +291,7 @@ class PokemonSeleccionadoController() {
     fun ataqueArriesgadoClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
         enemigo.recibirAtackPlayer(2)
+
         val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
         inicializarEnemy(enemyInterfaz)
         }
@@ -308,6 +312,7 @@ class PokemonSeleccionadoController() {
     fun ataqueMuyArriesgadoClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
             enemigo.recibirAtackPlayer(3)
+
             val enemyInterfaz =
                 InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
             inicializarEnemy(enemyInterfaz)
@@ -386,7 +391,7 @@ class PokemonSeleccionadoController() {
 
         val stage = ataqueMenu.scene.window as Stage
         stage.close()
-       seleccionDePokemonController.stage=null
+       seleccionDePokemonController.stageCombate=null
 
     }
 
