@@ -19,14 +19,14 @@ class EstadisticasController (){
     @FXML
     private lateinit var barChart: BarChart<String, Int>
 
-    var serie1=Series<Pokemon,Int>()
-    var serie2=Series<Pokemon,Int>()
-    var serie3=Series<Pokemon,Int>()
-    var serie4=Series<Pokemon,Int>()
-    var serie5=Series<Pokemon,Int>()
-    var serie6=Series<Pokemon,Int>()
+    var serie1=Series<String,Int>()
+    var serie2=Series<String,Int>()
+    var serie3=Series<String,Int>()
+    var serie4=Series<String,Int>()
+    var serie5=Series<String,Int>()
+    var serie6=Series<String,Int>()
 
-    var listaXYSeries=ArrayList<Series<Pokemon,Int>>(
+    var listaXYSeries=ArrayList<Series<String,Int>>(
         arrayListOf(serie1,serie2,serie3,serie4,serie5,serie6)
     )
 
@@ -48,7 +48,7 @@ class EstadisticasController (){
         listaXYSeries.forEachIndexed { index, series ->
 
             series.name=listaPokemon[index].nombre
-            series.data.add(XYChart.Data(listaPokemon[index],listaPokemon[index].contVeces))
+            series.data.add(XYChart.Data(listaPokemon[index].nombre,listaPokemon[index].contVeces))
             barChart.data.addAll(series)
         }
 
