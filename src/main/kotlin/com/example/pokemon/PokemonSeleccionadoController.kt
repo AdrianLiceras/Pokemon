@@ -263,8 +263,9 @@ class PokemonSeleccionadoController() {
         ataqueMenu.visibleProperty().set(false)
 
     }
-    var estadisticasController=EstadisticasController()
+
     var seleccionDePokemonController=SeleccionDePokemonController()
+
     @FXML
     fun ataqueSeguroClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
@@ -286,6 +287,7 @@ class PokemonSeleccionadoController() {
         }
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
+        obtenerEstadisticasController()
     }
     @FXML
     fun ataqueArriesgadoClicked(){
@@ -307,6 +309,7 @@ class PokemonSeleccionadoController() {
         }
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
+        obtenerEstadisticasController()
     }
     @FXML
     fun ataqueMuyArriesgadoClicked(){
@@ -329,6 +332,8 @@ class PokemonSeleccionadoController() {
         }
         if(!pokeselec.isAliveSelect())
             alertaSelec(pokeselec)
+        obtenerEstadisticasController()
+
     }
 
     @FXML
@@ -394,7 +399,14 @@ class PokemonSeleccionadoController() {
        seleccionDePokemonController.stageCombate=null
 
     }
+    var cotrollerEstadisticas=EstadisticasController()
+    fun obtenerEstadisticasController(){
+       if ( seleccionDePokemonController.enviarControllerEstadisticas()!=null) {
+           cotrollerEstadisticas = seleccionDePokemonController.enviarControllerEstadisticas()!!
 
+           cotrollerEstadisticas.actualizarpie()
+       }
+    }
 
     fun enviarDatosMenuSeleccion(seleccionDePokemonController: SeleccionDePokemonController){
         this.seleccionDePokemonController=seleccionDePokemonController

@@ -363,12 +363,12 @@ class SeleccionDePokemonController {
             e.printStackTrace()
         }
     }
-
+    private
+    var controllerEstadisticasController: EstadisticasController?=null
     @FXML
     fun estadisticasClicked(){
         try {
             if(stageEstadisticas==null) {
-                var estadisticasController = EstadisticasController()
                 stageEstadisticas = Stage()
                 stageEstadisticas?.isResizable = false
                 val loader = FXMLLoader(HelloApplication::class.java.getResource("estadisticas.fxml"))
@@ -376,6 +376,9 @@ class SeleccionDePokemonController {
                 stageEstadisticas?.title = "Pokemon"
                 stageEstadisticas?.scene = scene
                 stageEstadisticas?.show()
+
+                controllerEstadisticasController=loader.getController()
+                controllerEstadisticasController?.enviarController()
             }
         }catch (e: IOException){
             e.printStackTrace()
@@ -401,5 +404,8 @@ class SeleccionDePokemonController {
         }
     }
 
+    fun enviarControllerEstadisticas():EstadisticasController?{
+        return controllerEstadisticasController
+    }
 
 }
