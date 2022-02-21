@@ -356,7 +356,7 @@ class SeleccionDePokemonController {
                         controller.cargarPokemon(select)
                         controller.enviarDatosMenuSeleccion(this)
 
-
+                        controllerEstadisticasController?.actualizarBarChart(arrayPokemon)
                         pokeSelection = PokemonSeleccionadoController()
 
                     }
