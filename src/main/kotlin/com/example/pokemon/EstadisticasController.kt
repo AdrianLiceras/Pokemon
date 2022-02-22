@@ -50,6 +50,7 @@ class EstadisticasController (){
             series.name=listaPokemon[index].nombre
             series.data.add(XYChart.Data(listaPokemon[index].nombre,listaPokemon[index].contVeces))
             barChart.data.addAll(series)
+
         }
 
 

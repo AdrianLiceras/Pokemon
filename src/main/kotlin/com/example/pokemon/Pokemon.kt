@@ -2,10 +2,10 @@ package com.example.pokemon
 
 import kotlin.random.Random
 
-data class Pokemon(val nombre:String,val image:String,val vidaMax:Int,var nivel:Int,val genero:String,var imagenCombate:String,var vidaRest:Int=vidaMax, var click:Boolean=false,var contVeces:Int=0) {
+data class Pokemon(val nombre:String,val image:String,val vidaMax:Int,var nivel:Int,val genero:String,var imagenCombate:String,var vidaRest:Int=vidaMax, var click:Boolean=false,var contVeces:Int=0,var id: Int = 99) {
 
 
-    var id: Int = 0
+
 
     fun isAliveSelect():Boolean{
         var vivo=true
