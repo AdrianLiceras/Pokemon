@@ -43,7 +43,7 @@ class EstadisticasController (){
         pieChart.data[1].node.style="-fx-pie-color: #b59431"
 
     }
-    fun actualizarBarChart(listaPokemon: ArrayList<Pokemon>){
+   /* fun actualizarBarChart(listaPokemon: ArrayList<Pokemon>){
 
         listaXYSeries.forEachIndexed { index, series ->
 
@@ -55,15 +55,15 @@ class EstadisticasController (){
 
 
 
-    }
+    }*/
     fun enviarController():EstadisticasController{
         return this
     }
     var posiciones=0
 
-   /*fun actualizarBarChart(pokemon :Pokemon) {
+   fun actualizarBarChart(pokemon :Pokemon) {
 
-        val serie = XYChart.Series<String, Int>()
+        val serie = Series<String, Int>()
         serie.name = pokemon.nombre
         serie.data.add(XYChart.Data(pokemon.nombre,pokemon.contVeces))
         if (barChart.data.isEmpty()){
@@ -77,7 +77,7 @@ class EstadisticasController (){
             }else
                 barChart.data[pokemon.id]=serie
         }
-    }*/
+    }
 
 
     @FXML
