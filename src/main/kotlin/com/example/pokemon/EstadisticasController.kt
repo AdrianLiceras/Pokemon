@@ -43,19 +43,6 @@ class EstadisticasController (){
         pieChart.data[1].node.style="-fx-pie-color: #b59431"
 
     }
-   /* fun actualizarBarChart(listaPokemon: ArrayList<Pokemon>){
-
-        listaXYSeries.forEachIndexed { index, series ->
-
-            series.name=listaPokemon[index].nombre
-            series.data.add(XYChart.Data(listaPokemon[index].nombre,listaPokemon[index].contVeces))
-            barChart.data.addAll(series)
-
-        }
-
-
-
-    }*/
     fun enviarController():EstadisticasController{
         return this
     }
