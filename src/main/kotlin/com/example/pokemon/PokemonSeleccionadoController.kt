@@ -70,8 +70,11 @@ class PokemonSeleccionadoController() {
     class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
     class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
     var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
-
-
+    var seleccionDePokemonController=SeleccionDePokemonController()
+    var enemy=Random.nextInt(0, arrayPokeEnemy.size)
+    var enemigo= arrayPokeEnemy[enemy]
+    var arrayCopia=copiarArray(arrayPokeEnemy)
+    
     fun cargarPokemon(pokemon :Pokemon) {
 
         pokemon.click=false
@@ -106,9 +109,7 @@ class PokemonSeleccionadoController() {
 
 
     }
-    var enemy=Random.nextInt(0, arrayPokeEnemy.size)
-    var enemigo= arrayPokeEnemy[enemy]
-    var arrayCopia=copiarArray(arrayPokeEnemy)
+
 
     fun copiarArray(arrayEnemy: ArrayList<PokeEnemy>):ArrayList<PokeEnemy>{
         val arrayCopia:ArrayList<PokeEnemy>?=ArrayList()
@@ -264,7 +265,7 @@ class PokemonSeleccionadoController() {
 
     }
 
-    var seleccionDePokemonController=SeleccionDePokemonController()
+
 
     @FXML
     fun ataqueSeguroClicked(){

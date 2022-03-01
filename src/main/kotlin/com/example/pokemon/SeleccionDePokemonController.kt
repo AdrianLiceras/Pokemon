@@ -399,7 +399,20 @@ class SeleccionDePokemonController {
                 if (interfazPokemon.vida.progress<0.5)
                     interfazPokemon.vida.style="-fx-accent:#ff8929"
             }
+                if(interfazPokemon.vida.progress>0.5)
+                    interfazPokemon.vida.style="-fx-accent: #20ee31"
+                else
+                    if(interfazPokemon.vida.progress>0.25)
+                        interfazPokemon.vida.style="-fx-accent:#ff8929"
+                    else
+                        if (interfazPokemon.vida.progress<0.25)
+                            interfazPokemon.vida.style="-fx-accent:red"
+                        else{
+                            if (interfazPokemon.vida.progress<0.5)
+                                interfazPokemon.vida.style="-fx-accent:#ff8929"
+                        }
             }
+
             if(!interfazPokemon.pokemon.click) {
                 reset(interfazPokemon)
                 continuar.disableProperty().set(true)
