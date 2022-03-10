@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="583.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pokemon.Mochila">
+   <children>
+      <VBox fx:id="vBox" prefHeight="583.0" prefWidth="349.0">
+         <children>
+            <HBox fx:id="hBoxAntiquemar" onMouseClicked="#antiquemarClicked" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Imagenes/fuego.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="antiquemar" prefHeight="35.0" prefWidth="84.0" text="ANTIQUEMAR" />
+                  <Label prefHeight="89.0" prefWidth="173.0" text="Objeto que cura las quemaduras">
+                     <HBox.margin>
+                        <Insets left="-75.0" top="45.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="hBoxAnticongelar" layoutX="10.0" layoutY="10.0" onMouseClicked="#anticongelarClicked" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Imagenes/frio.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="anticongelar" prefHeight="35.0" prefWidth="135.0" text="ANTICONGELACIÓIN" />
+                  <Label prefHeight="105.0" prefWidth="181.0" text="Objeto que cura la congelación">
+                     <HBox.margin>
+                        <Insets left="-120.0" top="45.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="50.0" top="50.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="hBoxAntidoto" layoutX="10.0" layoutY="160.0" onMouseClicked="#antidotoClicked" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Imagenes/veneno.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="antidoto" prefHeight="35.0" prefWidth="135.0" text="ANTÍDOTO" />
+                  <Label prefHeight="105.0" prefWidth="181.0" text="Objeto que cura el veneno">
+                     <HBox.margin>
+                        <Insets left="-120.0" top="45.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
