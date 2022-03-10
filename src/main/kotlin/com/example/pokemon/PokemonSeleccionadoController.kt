@@ -1,6 +1,8 @@
 package com.example.pokemon
 
 import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
+import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -8,6 +10,7 @@ import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.BorderPane
 import javafx.stage.Stage
 import java.io.File
+import java.io.IOException
 import java.util.*
 import kotlin.random.Random
 import kotlin.system.exitProcess
@@ -64,23 +67,25 @@ class PokemonSeleccionadoController() {
     private lateinit var imagenMuerto: ImageView
     @FXML
     private lateinit var continuarMuerto: Button
+    @FXML
+    private lateinit var estado:ImageView
 
 
-
-    class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView)
+    class InterfazPokeCombatSelect(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView,var estado:ImageView)
     class InterfazPokeCombatEnemy(var nombre: Label, var vida:ProgressBar, var ps:Label, var nivel:Label, var imagen: ImageView, var pokeEnemy: PokeEnemy)
     var pokeselec=Pokemon("Jolteon","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Jolteon.gif",204,65,"src\\main\\resources\\com\\example\\pokemon\\Imagenes\\Macho.png","src\\main\\resources\\com\\example\\pokemon\\Imagenes\\JolteonCombate.gif")
     var seleccionDePokemonController=SeleccionDePokemonController()
     var enemy=Random.nextInt(0, arrayPokeEnemy.size)
     var enemigo= arrayPokeEnemy[enemy]
     var arrayCopia=copiarArray(arrayPokeEnemy)
-    
+    var stageBolsa:Stage?=null
+    lateinit var atackInterfaz:InterfazPokeCombatSelect
     fun cargarPokemon(pokemon :Pokemon) {
 
         pokemon.click=false
         pokeselec = pokemon
 
-        val atackInterfaz=InterfazPokeCombatSelect(nombreAtacante,progressAtacante,psAtacante,nivelAtacante,imagePokeSelect)
+        atackInterfaz=InterfazPokeCombatSelect(nombreAtacante,progressAtacante,psAtacante,nivelAtacante,imagePokeSelect,estado)
         inicializarSeleccion(atackInterfaz)
 
     }
@@ -89,6 +94,7 @@ class PokemonSeleccionadoController() {
     fun inicializarSeleccion(interfazPokeCombat: InterfazPokeCombatSelect){
 
         val pokeSelect= File(pokeselec.imagenCombate)
+        var fileEstado:File
         interfazPokeCombat.imagen.image=Image(pokeSelect.toURI().toString())
 
         interfazPokeCombat.nombre.text=pokeselec.nombre
@@ -106,6 +112,18 @@ class PokemonSeleccionadoController() {
                   else
                       if (interfazPokeCombat.vida.progress<0.5)
                            interfazPokeCombat.vida.style="-fx-accent:#ff8929"
+
+
+        if (pokeselec.quemado) {
+            fileEstado = File("src\\main\\resources\\com\\example\\pokemon\\Imagenes\\fuego.png")
+            interfazPokeCombat.estado.image=Image(fileEstado.toURI().toString())
+        }else if (pokeselec.congelado){
+            fileEstado = File("src\\main\\resources\\com\\example\\pokemon\\Imagenes\\frio.png")
+            interfazPokeCombat.estado.image=Image(fileEstado.toURI().toString())
+        }else if (pokeselec.envenenado){
+            fileEstado = File("src\\main\\resources\\com\\example\\pokemon\\Imagenes\\veneno.png")
+            interfazPokeCombat.estado.image=Image(fileEstado.toURI().toString())
+        }
 
 
     }
@@ -270,7 +288,7 @@ class PokemonSeleccionadoController() {
     @FXML
     fun ataqueSeguroClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
-            enemigo.recibirAtackPlayer(1)
+            enemigo.recibirAtackPlayer(1,pokeselec.congelado)
 
             val enemyInterfaz =
                 InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
@@ -293,7 +311,7 @@ class PokemonSeleccionadoController() {
     @FXML
     fun ataqueArriesgadoClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
-        enemigo.recibirAtackPlayer(2)
+        enemigo.recibirAtackPlayer(2,pokeselec.congelado)
 
         val enemyInterfaz=InterfazPokeCombatEnemy(nombreEnemy,progressEnemy,psEnemy,nivelEnemy,imagePokeEnemy,enemigo)
         inicializarEnemy(enemyInterfaz)
@@ -315,7 +333,7 @@ class PokemonSeleccionadoController() {
     @FXML
     fun ataqueMuyArriesgadoClicked(){
         if (enemigo.isAliveEnemy() and pokeselec.isAliveSelect()) {
-            enemigo.recibirAtackPlayer(3)
+            enemigo.recibirAtackPlayer(3,pokeselec.congelado)
 
             val enemyInterfaz =
                 InterfazPokeCombatEnemy(nombreEnemy, progressEnemy, psEnemy, nivelEnemy, imagePokeEnemy, enemigo)
@@ -397,9 +415,10 @@ class PokemonSeleccionadoController() {
 
         val stage = ataqueMenu.scene.window as Stage
         stage.close()
-       seleccionDePokemonController.stageCombate=null
+        seleccionDePokemonController.stageCombate=null
 
     }
+
     var cotrollerEstadisticas=EstadisticasController()
     fun obtenerEstadisticasController(){
        if ( seleccionDePokemonController.enviarControllerEstadisticas()!=null) {
@@ -411,6 +430,35 @@ class PokemonSeleccionadoController() {
 
     fun enviarDatosMenuSeleccion(seleccionDePokemonController: SeleccionDePokemonController){
         this.seleccionDePokemonController=seleccionDePokemonController
+    }
+    fun bolsaClicked(){
+
+        try {
+
+            if (stageBolsa == null) {
+
+                stageBolsa = Stage()
+                stageBolsa?.isResizable = false
+                val loader = FXMLLoader(HelloApplication::class.java.getResource("mochila.fxml"))
+                val scene = Scene(loader.load(), 349.0, 583.0)
+                stageBolsa?.title = "Pokemon"
+                stageBolsa?.scene = scene
+                stageBolsa?.show()
+                val controller = loader.getController<Mochila>()
+                controller.inicializar(pokeselec)
+                controller.pasarController(seleccionDePokemonController,this)
+            }
+        }catch (e: IOException){
+            e.printStackTrace()
+        }
+    }
+    fun actualizarEstadoEnCombate(pokemon: Pokemon){
+
+
+            if (!pokemon.quemado and !pokemon.congelado and !pokemon.envenenado)
+                atackInterfaz.estado.visibleProperty().set(false)
+
+
     }
 
 }

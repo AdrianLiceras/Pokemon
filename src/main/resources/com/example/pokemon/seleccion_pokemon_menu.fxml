@@ -60,9 +60,14 @@
                                         <Insets left="50.0" />
                                     </HBox.margin>
                                 </BorderPane>
+                        <ImageView fx:id="estadoPokemon1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="70.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="genero00" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets top="95.0" />
+                                        <Insets left="-20.0" top="95.0" />
                                     </HBox.margin>
                                 </ImageView>
                             </children></HBox>
@@ -121,9 +126,14 @@
                                         <Insets left="50.0" />
                                     </HBox.margin>
                                 </BorderPane>
+                        <ImageView fx:id="estadoPokemon2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="70.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="genero10" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets top="95.0" />
+                                        <Insets left="-20.0" top="95.0" />
                                     </HBox.margin>
                                 </ImageView>
                             </children>
@@ -185,9 +195,14 @@
                                         <Insets left="50.0" />
                                     </HBox.margin>
                                 </BorderPane>
+                        <ImageView fx:id="estadoPokemon3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="70.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="genero20" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets top="95.0" />
+                                        <Insets left="-20.0" top="95.0" />
                                     </HBox.margin>
                                 </ImageView>
                             </children>
@@ -249,9 +264,14 @@
                                         <Insets left="50.0" />
                                     </HBox.margin>
                                 </BorderPane>
+                        <ImageView fx:id="estadoPokemon4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="70.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="genero01" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets top="95.0" />
+                                        <Insets left="-20.0" top="95.0" />
                                     </HBox.margin>
                                 </ImageView>
                             </children>
@@ -313,9 +333,14 @@
                                         <Insets left="50.0" />
                                     </HBox.margin>
                                 </BorderPane>
+                        <ImageView fx:id="estadoPokemon5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="70.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="genero11" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets top="95.0" />
+                                        <Insets left="-20.0" top="95.0" />
                                     </HBox.margin>
                                 </ImageView>
                             </children>
@@ -377,9 +402,14 @@
                                         <Insets left="50.0" />
                                     </HBox.margin>
                                 </BorderPane>
+                        <ImageView fx:id="estadoPokemon6" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets top="70.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="genero21" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets top="95.0" />
+                                        <Insets left="-20.0" top="95.0" />
                                     </HBox.margin>
                                 </ImageView>
                             </children>

@@ -13,8 +13,10 @@ import javafx.scene.paint.Color
 import javafx.stage.Stage
 import java.io.File
 import java.io.IOException
+import kotlin.random.Random
 
 class SeleccionDePokemonController {
+
 
     var listInterfaces = mutableListOf<InterfazPokemon>()
 
@@ -45,7 +47,8 @@ class SeleccionDePokemonController {
 
     @FXML
     private lateinit var ps00: Label
-
+    @FXML
+    private lateinit var estadoPokemon1: ImageView
     //Pokemon 1,0
     @FXML
     private lateinit var vBox10: VBox
@@ -73,7 +76,8 @@ class SeleccionDePokemonController {
 
     @FXML
     private lateinit var ps10: Label
-
+    @FXML
+    private lateinit var estadoPokemon2: ImageView
     //Pokemon 2,0
     @FXML
     private lateinit var vBox20: VBox
@@ -101,7 +105,8 @@ class SeleccionDePokemonController {
 
     @FXML
     private lateinit var ps20: Label
-
+    @FXML
+    private lateinit var estadoPokemon3: ImageView
     //Pokemon 0,1
     @FXML
     private lateinit var vBox01: VBox
@@ -129,6 +134,8 @@ class SeleccionDePokemonController {
 
     @FXML
     private lateinit var ps01: Label
+    @FXML
+    private lateinit var estadoPokemon4: ImageView
 
     //Pokemon 1,1
     @FXML
@@ -157,6 +164,8 @@ class SeleccionDePokemonController {
 
     @FXML
     private lateinit var ps11: Label
+    @FXML
+    private lateinit var estadoPokemon5: ImageView
 
     //Pokemon 2,1
     @FXML
@@ -185,6 +194,8 @@ class SeleccionDePokemonController {
 
     @FXML
     private lateinit var ps21: Label
+    @FXML
+    private lateinit var estadoPokemon6: ImageView
 
     //Continuar
     @FXML
@@ -192,6 +203,8 @@ class SeleccionDePokemonController {
     companion object var stageCombate: Stage? =null
     var stageEstadisticas:Stage?=null
     fun inicializar(interfazPokemon: InterfazPokemon,i:Int){
+        val estado= Random.nextInt(0,3)
+        var fileEstado:File
         interfazPokemon.nombre.text=arrayPokemon[i].nombre
         interfazPokemon.nivel.text="Nv "+arrayPokemon[i].nivel.toString()
         interfazPokemon.ps.text=arrayPokemon[i].vidaRest.toString() + "/" + arrayPokemon[i].vidaMax.toString()
@@ -207,7 +220,23 @@ class SeleccionDePokemonController {
                 interfazPokemon.vida.style="-fx-accent:#ff8929"
         }
 
+        interfazPokemon.pokemon.estado(estado)
+        interfazPokemon.estado.visibleProperty().set(true)
+        if (interfazPokemon.pokemon.quemado) {
+            fileEstado = File("src\\main\\resources\\com\\example\\pokemon\\Imagenes\\fuego.png")
+            interfazPokemon.estado.image=Image(fileEstado.toURI().toString())
+        }else if (interfazPokemon.pokemon.congelado){
+            fileEstado = File("src\\main\\resources\\com\\example\\pokemon\\Imagenes\\frio.png")
+            interfazPokemon.estado.image=Image(fileEstado.toURI().toString())
+        }else if (interfazPokemon.pokemon.envenenado){
+            fileEstado = File("src\\main\\resources\\com\\example\\pokemon\\Imagenes\\veneno.png")
+            interfazPokemon.estado.image=Image(fileEstado.toURI().toString())
+        }
+        println("------------------------------------------")
 
+        println(interfazPokemon.pokemon.quemado)
+        println(interfazPokemon.pokemon.congelado)
+        println(interfazPokemon.pokemon.envenenado)
     }
     fun styleClicked(interfazPokemon: InterfazPokemon){
         interfazPokemon.nombre.textFill= Color.web("#38e8fc")
@@ -227,18 +256,18 @@ class SeleccionDePokemonController {
 
     }
 
-    class InterfazPokemon(var nombre: Label,var nivel: Label,var ps: Label,var imagenPokemon: ImageView,var imagenGenero : ImageView,var vida : ProgressBar,var border: BorderPane,var pokemon: Pokemon)
+    class InterfazPokemon(var nombre: Label,var nivel: Label,var ps: Label,var imagenPokemon: ImageView,var imagenGenero : ImageView,var vida : ProgressBar,var border: BorderPane,var pokemon: Pokemon,var estado:ImageView)
 
     @FXML
     fun initialize(){
 
         listInterfaces = mutableListOf(
-            InterfazPokemon(nombre00,nivel00,ps00,pokemon00,genero00,vida00,border00, arrayPokemon[0]),
-            InterfazPokemon(nombre10,nivel10,ps10,pokemon10,genero10,vida10,border10,arrayPokemon[1]),
-            InterfazPokemon(nombre20,nivel20,ps20,pokemon20,genero20,vida20,border20,arrayPokemon[2]),
-            InterfazPokemon(nombre01,nivel01,ps01,pokemon01,genero01,vida01,border01,arrayPokemon[3]),
-            InterfazPokemon(nombre11,nivel11,ps11,pokemon11,genero11,vida11,border11,arrayPokemon[4]),
-            InterfazPokemon(nombre21,nivel21,ps21,pokemon21,genero21,vida21,border21,arrayPokemon[5]),
+            InterfazPokemon(nombre00,nivel00,ps00,pokemon00,genero00,vida00,border00, arrayPokemon[0],estadoPokemon1),
+            InterfazPokemon(nombre10,nivel10,ps10,pokemon10,genero10,vida10,border10,arrayPokemon[1],estadoPokemon2),
+            InterfazPokemon(nombre20,nivel20,ps20,pokemon20,genero20,vida20,border20,arrayPokemon[2],estadoPokemon3),
+            InterfazPokemon(nombre01,nivel01,ps01,pokemon01,genero01,vida01,border01,arrayPokemon[3],estadoPokemon4),
+            InterfazPokemon(nombre11,nivel11,ps11,pokemon11,genero11,vida11,border11,arrayPokemon[4],estadoPokemon5),
+            InterfazPokemon(nombre21,nivel21,ps21,pokemon21,genero21,vida21,border21,arrayPokemon[5],estadoPokemon6),
         )
 
         listInterfaces.forEachIndexed { index, interfazPokemon ->
@@ -387,6 +416,12 @@ class SeleccionDePokemonController {
             e.printStackTrace()
         }
 
+    }
+    fun actualizarAlteracion(){
+        listInterfaces.forEach {
+            if (!it.pokemon.quemado and !it.pokemon.congelado and !it.pokemon.envenenado)
+                it.estado.visibleProperty().set(false)
+        }
     }
     fun actualizarEstado(pokemon: Pokemon){
         listInterfaces.forEachIndexed { index, interfazPokemon ->

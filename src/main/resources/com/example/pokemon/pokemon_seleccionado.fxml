@@ -89,6 +89,9 @@
                </BorderPane.margin>
             </Label>
          </right>
+         <bottom>
+            <Label fx:id="bolsa" onMouseClicked="#bolsaClicked" text="BOLSA" BorderPane.alignment="CENTER" />
+         </bottom>
       </BorderPane>
       <BorderPane fx:id="ataqueMenu" layoutX="44.0" layoutY="283.0" prefHeight="75.0" prefWidth="246.0" style="-fx-background-color: #f0ead6; -fx-border-color: #2f4f4f; -fx-border-width: 3;" visible="false">
          <left>
@@ -116,5 +119,6 @@
             </Label>
          </right>
       </BorderPane>
+      <ImageView fx:id="estado" fitHeight="25.0" fitWidth="25.0" layoutX="306.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>
